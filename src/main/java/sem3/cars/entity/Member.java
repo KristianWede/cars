@@ -46,6 +46,7 @@ public class Member {
     @UpdateTimestamp
     private LocalDateTime lastEdited;
 
+
     public Member(String user, String password, String email,
                   String firstName, String lastName, String street, String city, String zip) {
         this.username = user;

@@ -8,10 +8,7 @@ import sem3.cars.entity.Member;
 import sem3.cars.repositories.CarRepository;
 import sem3.cars.repositories.MemberRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class DeveloperData implements ApplicationRunner {
@@ -50,6 +47,10 @@ public class DeveloperData implements ApplicationRunner {
 
             memberRepository.save(m1);
             memberRepository.save(m2);
+
+
+            Map<String,String> phoneNumbers = new HashMap<>();
+
         }
 
     }
