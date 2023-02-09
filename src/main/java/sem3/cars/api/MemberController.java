@@ -30,7 +30,9 @@ class MemberController {
 
     //Security? ADMIN and USER ??
     @GetMapping(path = "/{username}")
-    MemberResponse getMemberById(@PathVariable String username) throws Exception {return null;}
+    MemberResponse getMemberById(@PathVariable String username) throws Exception {
+        return memberService.findMemberByUsername(username);
+    }
 
     //Security? ANONYMOUS
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,16 +44,25 @@ class MemberController {
     //Security? MEMBER
     @PutMapping("/{username}")
     ResponseEntity<Boolean> editMember(@RequestBody MemberRequest body, @PathVariable String username){
-        return null;
+        memberService.updateMember(body,username);
+        return ResponseEntity.ok(true);
     }
 
     //Security? ADMIN
     @PatchMapping("/ranking/{username}/{value}")
-    void setRankingForUser(@PathVariable String username, @PathVariable int value) {}
+    void setRankingForUser(@PathVariable String username, @PathVariable int value) {
+
+        memberService.editMemberRanking(username,value);
+
+    }
 
     // Security? ADMIN
     @DeleteMapping("/{username}")
-    void deleteMemberByUsername(@PathVariable String username) {}
+    void deleteMemberByUsername(@PathVariable String username) {
+
+        memberService.deleteMember(username);
+
+    }
 
 
 
