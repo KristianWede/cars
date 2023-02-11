@@ -32,13 +32,14 @@ public class CarRequest {
     }
 
 
-    public CarRequest(int id, String brand, String model, double pricePrDay, int bestDiscount, LocalDateTime created, LocalDateTime lastEdited) {
-        this.id = id;
-        this.brand = brand;
-        this.model = model;
-        this.pricePrDay = pricePrDay;
-        this.bestDiscount = bestDiscount;
-        this.created = created;
-        this.lastEdited = lastEdited;
+    public CarRequest(Car c) {
+        this.id = c.getId();
+        this.brand = c.getBrand();
+        this.model = c.getModel();
+        this.pricePrDay = c.getPricePrDay();
+        this.bestDiscount = c.getBestDiscount();
+        this.created = c.getCreated();
+        this.lastEdited = c.getLastEdited();
     }
+
 }
