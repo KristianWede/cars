@@ -18,28 +18,21 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class CarRequest {
-
-    private int id;
     private String brand;
     private String model;
     private double pricePrDay;
     private int bestDiscount;
-    private LocalDateTime created;
-    private LocalDateTime lastEdited;
 
     public static Car getCarEntity(CarRequest c){
-        return new Car(c.id, c.brand,c.model,c.pricePrDay,c.bestDiscount,c.created,c.lastEdited);
+        return new Car(c.brand,c.model,c.pricePrDay,c.bestDiscount);
     }
 
 
     public CarRequest(Car c) {
-        this.id = c.getId();
         this.brand = c.getBrand();
         this.model = c.getModel();
         this.pricePrDay = c.getPricePrDay();
         this.bestDiscount = c.getBestDiscount();
-        this.created = c.getCreated();
-        this.lastEdited = c.getLastEdited();
     }
 
 }

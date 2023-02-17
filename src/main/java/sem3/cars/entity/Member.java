@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import sem3.security.entity.UserWithRoles;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,8 +17,11 @@ import java.util.Map;
 @Getter
 @Setter
 @NoArgsConstructor
+
 @Entity(name = "member")
-public class Member {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "USER_TYPE")
+public class Member extends UserWithRoles {
 
 
     @ElementCollection
@@ -28,10 +32,6 @@ public class Member {
     @Column(name = "phoneNumber")
     Map<String,String> phones = new HashMap<>();
 
-    @Id
-    private String username;
-    private String email;
-    private String password;
     private String firstName;
     private String lastName;
     private String street;
@@ -46,17 +46,19 @@ public class Member {
     @UpdateTimestamp
     private LocalDateTime lastEdited;
 
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "member")
+    List<Reservation> reservations = new ArrayList<>();
 
     public Member(String user, String password, String email,
                   String firstName, String lastName, String street, String city, String zip) {
-        this.username = user;
-        this.password= password;
-        this.email = email;
+        super(user,password,email);
         this.firstName = firstName;
         this.lastName = lastName;
         this.street = street;
         this.city = city;
         this.zip = zip;
     }
+
+
 
 }

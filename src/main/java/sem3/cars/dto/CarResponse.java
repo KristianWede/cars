@@ -1,5 +1,6 @@
 package sem3.cars.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,9 @@ public class CarResponse {
     private String model;
     private double pricePrDay;
     private int bestDiscount;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     private LocalDateTime created;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     private LocalDateTime lastEdited;
 
     public CarResponse(Car car, boolean includeAll){
@@ -27,8 +30,8 @@ public class CarResponse {
         this.brand = car.getBrand();
         this.model = car.getModel();
         this.pricePrDay = car.getPricePrDay();
-        this.bestDiscount = car.getBestDiscount();
         if(includeAll) {
+            this.bestDiscount = car.getBestDiscount();
             this.created = car.getCreated();
             this.lastEdited = car.getLastEdited();
         }

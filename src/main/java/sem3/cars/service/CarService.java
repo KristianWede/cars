@@ -41,9 +41,9 @@ public class CarService {
 
     public CarResponse addCar(CarRequest carRequest) {
 
-        if(carRepository.existsById(carRequest.getId())){
+/*        if(carRepository.existsById(carRequest.getId())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"A Car with this ID already exist");
-        }
+        }*/
         //Later you should add error checks --> Missing arguments, email taken etc.
 
         Car newCar = CarRequest.getCarEntity(carRequest);
@@ -56,7 +56,7 @@ public class CarService {
     public ResponseEntity<Boolean> updateCar(CarRequest body, int id) {
             Car mtoUpdate = carRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-            mtoUpdate.setId(body.getId());
+            //mtoUpdate.setId(body.getId());
 
             return ResponseEntity.ok(true);
     }

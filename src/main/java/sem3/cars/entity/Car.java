@@ -8,13 +8,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-@Entity
+@Entity(name = "car")
 public class Car{
 
     @Id
@@ -39,10 +41,16 @@ public class Car{
     @UpdateTimestamp
     private LocalDateTime lastEdited;
 
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "car")
+    List<Reservation> reservations = new ArrayList<>();
+
+
     public Car(String brand, String model, double pricePrDay, int bestDiscount) {
         this.brand = brand;
         this.model = model;
         this.pricePrDay = pricePrDay;
         this.bestDiscount = bestDiscount;
     }
+
+
 }
